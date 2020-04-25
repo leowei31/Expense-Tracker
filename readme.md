@@ -1,5 +1,8 @@
 #Expense Tracker built with Node JS and Express 
 
+App on heroku:
+https://expense-tracker-leo-wei.herokuapp.com/
+
 Single page application
 
 For Running Locally:
