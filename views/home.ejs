@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Expense Tracker</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/d5886c3c0b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div id = "container">
+		<h1>My Expenses</h1>
+		<form action="/" method="POST"> 
+            <input type="text" name="name" placeholder="Name of Expense" required>
+            <input type="number" name="cost" placeholder="Cost of Expense" required>
+            <input type="text" name="category" placeholder="Category of Expense" required>
+            <button>Create New Expenses</button>
+        </form>
+	</div>
+
+    <div id ="containerTable">
+        <% var obj = data %>
+        <% var length = obj.length%>   
+            <table>
+                    <tr>
+                    <th>Expense Name</th>
+                    <th>Cost of Expense</th>
+                    <th>Category of Expense</th>
+                    </tr>
+                <%for(i = 0; i < length; i ++){%>
+
+                    <tr>
+                        <td>
+                            <% var tempName = JSON.stringify(obj[i].name)%>
+                            <% var expenseName = new String()%>
+                            <% var expenseName = tempName.toString().replace(/"/g, "");%>
+                            <%= expenseName%>
+                            <!-- used above to remove quotation marks when we convert object to string -->
+                        </td>
+                        <td>
+                            <% var tempCost = JSON.stringify(obj[i].cost)%>
+                            <% var expenseCost = new String()%>
+                            <% var expenseCost = tempCost.toString().replace(/"/g, "");%>
+                            <%= expenseCost%>
+                        </td>
+                        <td>
+                            <% var tempCategory = JSON.stringify(obj[i].category)%>
+                            <% var expenseCategory = new String()%>
+                            <% var expenseCategory = tempCategory.toString().replace(/"/g, "");%>
+                            <%= expenseCategory%>
+                        </td>
+                        <td>
+                            <form action = "/delete" method = "POST">
+                                <input name = "<%=i%>" hidden></input>
+                                <button><i class="fas fa-trash"></i></button>
+                                
+                            </form>
+                        </td>
+                        
+                    </tr>
+                    
+
+                <%}%>
+
+                    <tr>
+                        <td>
+                            <form action="/sortbyname" method = "POST">
+                                <button>Sort by Name</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/sortbycost" method = "POST">
+                                <button>Sort by Cost</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/sortbycategory" method = "POST">
+                                <button>Sort by Category</button>
+                            </form>
+                        </td>
+                    </tr>
+                
+            </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>
